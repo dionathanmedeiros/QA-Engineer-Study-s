@@ -1,38 +1,42 @@
 import userData from '../fixtures/user-data.json'
+import LoginPage from '../pages/loginPage'
+import LoginFail from '../pages/loginFail'
+
+const loginPage = new LoginPage()
+const loginFail= new LoginFail()
 
 describe('Orange HRM Tests', () => {
 
   const selectorsList = {
-      usernameField: "[name='username']",
-      passwordField: "[name='password']",
-      loginButton: "[type='submit']",
+      
       sectionTitleTopBar: ".oxd-topbar-header-breadcrumb-module",
       dashboardGrid: ".orangehrm-dashboard-grid",
-      wrongCredentialAlert: "[role='alert']",
+      
       myInfoButton: ".oxd-navbar-nav [href='/web/index.php/pim/viewMyDetails']",
       firstName: "[name='firstName']",
       middleName: "[name='middleName']",
       lastName: "[name='lastName']",
       genericField:".oxd-input--active",
-      dateField:"[placeholder='D, dd M yyyy']",
+      dateField:"[placeholder='yyyy-dd-mm']",
       dateCloseButton:(".--close"),
       buttonSubmit:("[type='submit']"),
       buttonDown:(".oxd-select-text--arrow"),
-      nationality:(':nth-child(27)'),
+      nationality:(':nth-child(41) > span'),
       maritalStatus:('.oxd-select-dropdown > :nth-child(3)'),
       gender:(".oxd-radio-wrapper"),
       bloodType:('.oxd-select-dropdown > :nth-child(6)'),
-      testField:("[options='']")
+      testField:("[options='']"),
+      CloseButtonSubmit:('.oxd-toast-close')
 
 
   }
 
-  it.only('Login - Sucess', () => {
+  it('Login - Sucess', () => {
+      loginPage.accessLoginPage(),
+      loginPage.loginWithUser(userData.userSuccess.username, userData.userSuccess.password)
     //               Login Success
-    cy.visit('/auth/login')
-    cy.get(selectorsList.usernameField).type(userData.userSuccess.username)
-    cy.get(selectorsList.passwordField).type(userData.userSuccess.password)
-    cy.get(selectorsList.loginButton).click()
+    
+    
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorsList.dashboardGrid)
     //                My Info
@@ -54,26 +58,26 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorsList.gender).eq(0).click()
     cy.get(selectorsList.buttonSubmit).eq(0).click()
     cy.get('body').should('contain', 'Successfully Update')
-    cy.get('.oxd-toast-close')
+    cy.get(selectorsList.CloseButtonSubmit).click({force:true})
 //                Custom Fields
     cy.get(selectorsList.buttonDown).eq(2).click()
     cy.get(selectorsList.bloodType).click()
     cy.get(selectorsList.testField).clear().type("777")
     cy.get(selectorsList.buttonSubmit).eq(1).click()
-    cy.get('body').should('contain', 'Successfully Update')
-    cy.get('.oxd-toast-close')
+    cy.get('body').should('contain', 'Successfully Saved')
+    cy.get(selectorsList.CloseButtonSubmit).click({force:true})
+
 
     
     
 
 
   })
+
   //              Login Fail
-  it('Login - Fail', () => {
-    cy.visit('/auth/login')
-    cy.get(selectorsList.usernameField).type(userData.userFail.username)
-    cy.get(selectorsList.passwordField).type(userData.userFail.password)
-    cy.get(selectorsList.loginButton).click()
-    cy.get(selectorsList.wrongCredentialAlert)
+  it('Login - Fail', () =>  {
+    loginFail.accessLoginFail(),
+    loginFail.commandsLoginFail(userData.userFail.username, userData.userFail.password)
+ 
   })
 })
