@@ -15,7 +15,7 @@ import CustomFields from '../pages/customFields'
   const customFields= new CustomFields()
 
 describe('Orange HRM Tests', () => {
-  
+
 //                    Login
   it('Login - Sucess', () => {
         loginPage.accessLoginPage(),
@@ -34,12 +34,12 @@ describe('Orange HRM Tests', () => {
     //               Custom Fields             //
         customFields.customFields(myInfoFix.customField.testField)
   })
-
     //               Login Fail                //
 
-  it('Login - Fail', () =>  {
+  it.only('Login - Fail', () =>  {
         loginFail.accessLoginFail(),
-        loginFail.commandsLoginFail(userData.userFail.username, userData.userFail.password)
+        loginFail.commandsLoginFail(userData.userFail.username, userData.userFail.password),
+        loginFail.wrongAlert()
  
   })
 })

@@ -16,6 +16,8 @@
         cy.get(this.selectorsList().usernameField).type(username)
         cy.get(this.selectorsList().passwordField).type(password)
         cy.get(this.selectorsList().loginButton).click()
+    }
+    wrongAlert(){
         cy.get(this.selectorsList().wrongCredentialAlert)
       }
     }
