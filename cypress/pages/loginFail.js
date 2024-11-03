@@ -2,9 +2,9 @@
         selectorsList() {
             const selectors = {
               usernameField: "[name='username']",
-             passwordField: "[name='password']",
-               loginButton: "[type='submit']",
-               wrongCredentialAlert: "[role='alert']",
+              passwordField: "[name='password']",
+              loginButton: "[type='submit']",
+              wrongCredentialAlert: "[role='alert']",
             }
             return selectors
     }
