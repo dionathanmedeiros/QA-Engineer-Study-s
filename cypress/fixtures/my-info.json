@@ -1,0 +1,21 @@
+{
+"employeeName":{
+    "firstName":"creito",
+    "middleName":"aparecido",
+    "lastName":"P7"
+},
+"employeeId":{
+    "employeeIdTest":"40028922",
+    "otherId":"12345678"
+    },
+"driverLicenseNumber":{
+     "driverLicenseNumberId":"123456789",
+     "licenseExpiryDate":"2025-30-10"
+},
+"dateOfBirthAndGender":{
+    "dateOfBirth":"1999-12-12"
+},
+"customField":{
+    "testField":"777"
+}
+}

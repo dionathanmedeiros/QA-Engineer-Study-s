@@ -1,10 +1,11 @@
 import userData from '../fixtures/user-data.json'
+import myInfoFix from '../fixtures/my-info.json'
 import LoginPage from '../pages/loginPage'
 import LoginFail from '../pages/loginFail'
 import Dashboard from '../pages/dashboard'
 import MenuPage from '../pages/menuPage'
 import MyInfo from '../pages/myInfo'
-import CustomFields from '../pages/customfields'
+import CustomFields from '../pages/customFields'
 
   const loginPage = new LoginPage()
   const loginFail= new LoginFail()
@@ -14,8 +15,7 @@ import CustomFields from '../pages/customfields'
   const customFields= new CustomFields()
 
 describe('Orange HRM Tests', () => {
-
-  const selectorsList = {}
+  
 //                    Login
   it('Login - Sucess', () => {
         loginPage.accessLoginPage(),
@@ -25,9 +25,14 @@ describe('Orange HRM Tests', () => {
     //                MenuPage                 //
         menuPage.acessMyInfo()
     //                My info Page             //
-        myInfoPage.myInfoPage()
+        myInfoPage.employeeName(myInfoFix.employeeName.firstName, myInfoFix.employeeName.middleName, myInfoFix.employeeName.lastName)
+        myInfoPage.employeeId(myInfoFix.employeeId.employeeIdTest, myInfoFix.employeeId.otherId)
+        myInfoPage.driverLicenseNumber(myInfoFix.driverLicenseNumber.driverLicenseNumberId, myInfoFix.driverLicenseNumber.licenseExpiryDate)
+        myInfoPage.nationalityAndMaritalStatus()
+        myInfoPage.dateOfBirthAndGender(myInfoFix.dateOfBirthAndGender.dateOfBirth)
+        myInfoPage.submitButton()
     //               Custom Fields             //
-        customFields.customFields()
+        customFields.customFields(myInfoFix.customField.testField)
   })
 
     //               Login Fail                //

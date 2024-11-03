@@ -10,10 +10,10 @@ class CustomFields {
                 return selectors
             }
             
-    customFields() {
+    customFields(customFields) {
         cy.get(this.selectorsList().buttonDown).eq(2).click()
         cy.get(this.selectorsList().bloodType).click()
-        cy.get(this.selectorsList().testField).clear().type("777")
+        cy.get(this.selectorsList().testField).clear().type(customFields)
         cy.get(this.selectorsList().buttonSubmit).eq(1).click()
         cy.get('body').should('contain', 'Successfully Saved')
         cy.get(this.selectorsList().CloseButtonSubmit).click({force:true})
