@@ -1,16 +1,15 @@
 import userData from '../fixtures/user-data.json'
 import LoginPage from '../pages/loginPage'
 import LoginFail from '../pages/loginFail'
+import Dashboard from '../pages/dashboard'
 
 const loginPage = new LoginPage()
 const loginFail= new LoginFail()
+const dashboard= new Dashboard()
 
 describe('Orange HRM Tests', () => {
 
   const selectorsList = {
-      
-      sectionTitleTopBar: ".oxd-topbar-header-breadcrumb-module",
-      dashboardGrid: ".orangehrm-dashboard-grid",
       
       myInfoButton: ".oxd-navbar-nav [href='/web/index.php/pim/viewMyDetails']",
       firstName: "[name='firstName']",
@@ -30,15 +29,12 @@ describe('Orange HRM Tests', () => {
 
 
   }
-
+//                    Login
   it('Login - Sucess', () => {
       loginPage.accessLoginPage(),
       loginPage.loginWithUser(userData.userSuccess.username, userData.userSuccess.password)
-    //               Login Success
-    
-    
-    cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
-    cy.get(selectorsList.dashboardGrid)
+    //               Dashboard
+    dashboard.acessDashboard()
     //                My Info
     cy.get(selectorsList.myInfoButton).click()
     cy.get(selectorsList.firstName).clear().type("creito")
