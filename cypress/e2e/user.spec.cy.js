@@ -6,11 +6,14 @@ import MenuPage from '../pages/menuPage'
 import MyInfo from '../pages/myInfo'
 import CustomFields from '../pages/customFields'
 
+  const Chance = require('chance')
+
   const loginPage = new LoginPage()
   const dashboard= new Dashboard()
   const menuPage= new MenuPage()
   const myInfoPage= new MyInfo()
   const customFields= new CustomFields()
+  const chance = new Chance();
 
 describe('Orange HRM Tests Functions', () => {
 
@@ -23,7 +26,7 @@ describe('Orange HRM Tests Functions', () => {
     //                MenuPage                 //
         menuPage.acessMyInfo()
     //                My info Page             //
-        myInfoPage.employeeName(myInfoFix.employeeName.firstName, myInfoFix.employeeName.middleName, myInfoFix.employeeName.lastName)
+        myInfoPage.employeeName(chance.first(), chance.name(), chance.last())
         myInfoPage.employeeId(myInfoFix.employeeId.employeeIdTest, myInfoFix.employeeId.otherId)
         myInfoPage.driverLicenseNumber(myInfoFix.driverLicenseNumber.driverLicenseNumberId, myInfoFix.driverLicenseNumber.licenseExpiryDate)
         myInfoPage.nationalityAndMaritalStatus()
